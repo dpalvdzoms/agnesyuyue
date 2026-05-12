@@ -300,8 +300,11 @@
         const fulltext = document.getElementById('work-fulltext').value.trim();
         const audio = document.getElementById('work-audio').value.trim();
 
-        // Convert plain text to HTML paragraphs
-        const bodyHtml = bodyRaw.split(/\n\s*\n/).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('\n');
+        // Convert plain text to HTML
+        // Single line break = new paragraph, empty line = visual spacer
+        const bodyHtml = bodyRaw.split('\n').map(line =>
+          line.trim() === '' ? '<div class="spacer"></div>' : `<p>${line}</p>`
+        ).join('\n');
 
         const newEntry = `  {
     date: "${date}",
@@ -381,10 +384,10 @@
         const bodyRaw = document.getElementById('ft-body').value.trim();
 
         // Convert plain text paragraphs to HTML
-        const paragraphs = bodyRaw.split(/\n\s*\n/).map(p => {
-          const lines = p.trim().replace(/\n/g, '<br>');
-          return `        <p>${lines}</p>`;
-        }).join('\n');
+        // Single line break = new paragraph, empty line = visual spacer
+        const paragraphs = bodyRaw.split('\n').map(line =>
+          line.trim() === '' ? '        <div class="spacer"></div>' : `        <p>${line}</p>`
+        ).join('\n');
 
         // Build HTML page
         const backlinkText = backlink.includes('fiction') ? '小说' :

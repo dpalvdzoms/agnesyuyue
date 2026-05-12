@@ -260,6 +260,7 @@ a:hover { color: var(--gray); }
 }
 
 .card-body p { margin-bottom: 0.2rem; }
+.card-body .spacer { height: 0.8em; }
 
 .card-footer {
   margin-top: 0.8rem;
@@ -306,6 +307,8 @@ a:hover { color: var(--gray); }
   line-height: 2.2;
   font-size: 0.95rem;
 }
+
+.article-content .spacer { height: 1.2em; }
 
 .article-content hr {
   border: none;
