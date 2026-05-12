@@ -173,6 +173,60 @@
       </form>
 
       <div class="msg" id="msg"></div>
+
+      <!-- 全文页面创建 -->
+      <div style="margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--rule);">
+        <h2 class="page-title">创建全文页面</h2>
+        <p style="font-size: 0.85rem; color: var(--gray); margin-bottom: 1.5rem;">用于小说、非虚构等长文。创建后将全文链接填入上方的"全文链接"字段。</p>
+
+        <form id="fulltext-form" onsubmit="handleFulltext(event)">
+          <div class="form-group">
+            <label>文件名</label>
+            <input type="text" id="ft-filename" required placeholder="例：fiction-yanchengxi">
+            <p class="form-hint">英文或拼音，不含空格。最终路径为 works/pieces/你的文件名.html</p>
+          </div>
+
+          <div class="form-group">
+            <label>标题</label>
+            <input type="text" id="ft-title" required placeholder="例：盐湖城以西">
+          </div>
+
+          <div class="form-group">
+            <label>日期</label>
+            <input type="text" id="ft-date" required placeholder="2026.05.12">
+          </div>
+
+          <div class="form-group">
+            <label>分类标签</label>
+            <select id="ft-category">
+              <option value="小说">小说</option>
+              <option value="非虚构">非虚构</option>
+              <option value="填词">填词</option>
+              <option value="摩登诗词">摩登诗词</option>
+              <option value="歌曲">歌曲</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>返回链接</label>
+            <select id="ft-backlink">
+              <option value="../fiction.html">小说列表</option>
+              <option value="../non-fiction.html">非虚构列表</option>
+              <option value="../index.html">作品集总览</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>正文</label>
+            <textarea id="ft-body" required placeholder="直接粘贴全文。每段之间空一行即可，会自动转为段落格式。" style="min-height: 300px;"></textarea>
+          </div>
+
+          <button type="submit" class="btn" id="ft-submit-btn">创建全文页面</button>
+        </form>
+
+        <div class="msg" id="ft-msg"></div>
+      </div>
+
     </div>
   </main>
 
@@ -301,6 +355,115 @@
 
     function showMsg(text, type) {
       const msg = document.getElementById('msg');
+      msg.textContent = text;
+      msg.className = `msg msg-${type}`;
+    }
+
+    // Full text page creation
+    async function handleFulltext(e) {
+      e.preventDefault();
+      const token = localStorage.getItem('gh_token');
+      if (!token) {
+        showFtMsg('请先设置 GitHub Token', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('ft-submit-btn');
+      btn.disabled = true;
+      btn.textContent = '创建中...';
+
+      try {
+        const filename = document.getElementById('ft-filename').value.trim();
+        const title = document.getElementById('ft-title').value.trim();
+        const date = document.getElementById('ft-date').value.trim();
+        const category = document.getElementById('ft-category').value;
+        const backlink = document.getElementById('ft-backlink').value;
+        const bodyRaw = document.getElementById('ft-body').value.trim();
+
+        // Convert plain text paragraphs to HTML
+        const paragraphs = bodyRaw.split(/\n\s*\n/).map(p => {
+          const lines = p.trim().replace(/\n/g, '<br>');
+          return `        <p>${lines}</p>`;
+        }).join('\n');
+
+        // Build HTML page
+        const backlinkText = backlink.includes('fiction') ? '小说' :
+                             backlink.includes('non-fiction') ? '非虚构' : '作品集';
+
+        const html = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${title}</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <a href="../../index.html" class="sidebar-name">你的名字</a>
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar-nav').classList.toggle('open')">☰</button>
+    <ul class="sidebar-nav">
+      <li><a href="../../index.html">个人介绍</a></li>
+      <li><a href="../../experience.html">待补充经历</a></li>
+      <li><a href="../../academic.html">学术成果</a></li>
+      <li><a href="../index.html" class="active">作品集</a></li>
+    </ul>
+    <div class="sidebar-footer">© 2026</div>
+  </aside>
+
+  <main class="main">
+    <div class="content-area">
+      <a href="${backlink}" class="back-link">← 返回${backlinkText}</a>
+      <h1 class="article-title">${title}</h1>
+      <div class="article-meta">${date} · ${category}</div>
+
+      <div class="article-content">
+${paragraphs}
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>`;
+
+        const filePath = `works/pieces/${filename}.html`;
+
+        // Commit to GitHub
+        const commitRes = await fetch(
+          `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`,
+          {
+            method: 'PUT',
+            headers: {
+              Authorization: `token ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              message: `创建全文页面：${title}`,
+              content: btoa(unescape(encodeURIComponent(html)))
+            })
+          }
+        );
+
+        if (!commitRes.ok) {
+          const err = await commitRes.json();
+          throw new Error(err.message || '创建失败');
+        }
+
+        showFtMsg(`创建成功！全文链接为：pieces/${filename}.html\n请将此路径填入上方"发布新作品"的全文链接字段。`, 'success');
+
+        document.getElementById('fulltext-form').reset();
+
+      } catch (err) {
+        showFtMsg(err.message, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '创建全文页面';
+      }
+    }
+
+    function showFtMsg(text, type) {
+      const msg = document.getElementById('ft-msg');
       msg.textContent = text;
       msg.className = `msg msg-${type}`;
     }
