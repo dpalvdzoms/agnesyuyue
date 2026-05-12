@@ -1,5 +1,21 @@
 const worksData = [
   {
+    date: "2026.01.28",
+    title: "临江仙 · 千里遥寄螺蛳奇",
+    category: "modern",
+    categoryLabel: "摩登诗词",
+    body: `<p>每天早起都好困，冬寒加重宫寒。</p>
+<p>冷风往我被中钻。</p>
+<p>睡呵睡不醒，梦也梦难完。</p>
+<div class="spacer"></div>
+<p>地球总有天在黑，为何无法长眠？</p>
+<p>只求一觉到明年。</p>
+<p>明年鞭炮后，醒见绿春天。</p>`,
+    fullTextUrl: null,
+    audio: null,
+    video: null
+  },
+  {
     date: "2026.02.01",
     title: "少年游 · 给zzx写什么呢",
     category: "modern",
