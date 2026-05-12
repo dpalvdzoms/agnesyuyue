@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作品管理</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .admin-form {
+      max-width: 600px;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid #CCCCCC;
+      border-radius: 6px;
+      font-family: var(--font-zh);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      background: var(--white);
+      color: var(--black);
+    }
+    .form-group textarea {
+      min-height: 180px;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #666;
+    }
+    .form-hint {
+      font-size: 0.75rem;
+      color: var(--gray-light);
+      margin-top: 0.3rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.5rem;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-zh);
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.7; }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-secondary {
+      background: var(--white);
+      color: var(--black);
+      border: 1px solid #CCCCCC;
+    }
+    .msg {
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      display: none;
+    }
+    .msg-success { background: #f0f9f0; color: #2d6a2d; display: block; }
+    .msg-error { background: #fdf0f0; color: #8b2020; display: block; }
+    .token-section {
+      margin-bottom: 2.5rem;
+      padding: 1.2rem;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+    }
+    .token-section h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+    .token-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .token-row input {
+      flex: 1;
+    }
+    .token-status {
+      font-size: 0.78rem;
+      margin-top: 0.4rem;
+    }
+    .token-status.ok { color: #2d6a2d; }
+    .token-status.none { color: var(--gray-light); }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <a href="index.html" class="sidebar-name">你的名字</a>
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar-nav').classList.toggle('open')">☰</button>
+    <ul class="sidebar-nav">
+      <li><a href="index.html">个人介绍</a></li>
+      <li><a href="experience.html">待补充经历</a></li>
+      <li><a href="academic.html">学术成果</a></li>
+      <li><a href="works/index.html">作品集</a></li>
+    </ul>
+    <div class="sidebar-footer">管理页面</div>
+  </aside>
+
+  <main class="main">
+    <div class="content-area admin-form">
+      <h1 class="page-title">发布新作品</h1>
+
+      <!-- Token 设置 -->
+      <div class="token-section">
+        <h3>GitHub 授权</h3>
+        <div class="token-row">
+          <input type="password" id="token-input" placeholder="粘贴你的 GitHub Token">
+          <button class="btn btn-secondary" onclick="saveToken()">保存</button>
+        </div>
+        <div class="token-status none" id="token-status">未设置</div>
+        <p class="form-hint">Token 保存在浏览器本地，不会上传。<a href="https://github.com/settings/tokens/new?scopes=repo&description=agnesyuyue-admin" target="_blank">点此生成 Token</a>（勾选 repo 权限）</p>
+      </div>
+
+      <!-- 发布表单 -->
+      <form id="publish-form" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label>标题</label>
+          <input type="text" id="work-title" required placeholder="例：满庭芳 · 暮春">
+        </div>
+
+        <div class="form-group">
+          <label>日期</label>
+          <input type="text" id="work-date" required placeholder="2026.05.12">
+        </div>
+
+        <div class="form-group">
+          <label>分类</label>
+          <select id="work-category" required>
+            <option value="ci">填词</option>
+            <option value="modern">摩登诗词</option>
+            <option value="fiction">小说</option>
+            <option value="nonfiction">非虚构</option>
+            <option value="songs">歌曲</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>正文（卡片展示内容）</label>
+          <textarea id="work-body" required placeholder="直接输入文字。换行会自动变成段落。"></textarea>
+          <p class="form-hint">每段之间空一行。短作品写全文，长作品写摘要即可。</p>
+        </div>
+
+        <div class="form-group">
+          <label>全文链接（可选，仅长文需要）</label>
+          <input type="text" id="work-fulltext" placeholder="例：pieces/fiction-xxx.html">
+          <p class="form-hint">长篇小说/非虚构的完整页面路径，短文留空</p>
+        </div>
+
+        <div class="form-group">
+          <label>音频链接（可选）</label>
+          <input type="text" id="work-audio" placeholder="例：audio/song.mp3 或外部链接">
+        </div>
+
+        <button type="submit" class="btn" id="submit-btn">发布</button>
+      </form>
+
+      <div class="msg" id="msg"></div>
+    </div>
+  </main>
+
+  <script>
+    const REPO_OWNER = 'dpalvdzoms';
+    const REPO_NAME = 'agnesyuyue';
+    const FILE_PATH = 'works-data.js';
+
+    const categoryLabels = {
+      ci: '填词',
+      modern: '摩登诗词',
+      fiction: '小说',
+      nonfiction: '非虚构',
+      songs: '歌曲'
+    };
+
+    // Token management
+    function saveToken() {
+      const token = document.getElementById('token-input').value.trim();
+      if (token) {
+        localStorage.setItem('gh_token', token);
+        document.getElementById('token-input').value = '';
+        updateTokenStatus();
+      }
+    }
+
+    function updateTokenStatus() {
+      const status = document.getElementById('token-status');
+      if (localStorage.getItem('gh_token')) {
+        status.textContent = '已设置 ✓';
+        status.className = 'token-status ok';
+      } else {
+        status.textContent = '未设置';
+        status.className = 'token-status none';
+      }
+    }
+
+    updateTokenStatus();
+
+    // Form submission
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const token = localStorage.getItem('gh_token');
+      if (!token) {
+        showMsg('请先设置 GitHub Token', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = '发布中...';
+
+      try {
+        // Get current file content and SHA
+        const fileRes = await fetch(
+          `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`,
+          { headers: { Authorization: `token ${token}` } }
+        );
+
+        if (!fileRes.ok) throw new Error('无法读取 works-data.js，请检查 Token 权限');
+
+        const fileData = await fileRes.json();
+        const currentContent = atob(fileData.content.replace(/\n/g, ''));
+        const sha = fileData.sha;
+
+        // Build new entry
+        const title = document.getElementById('work-title').value.trim();
+        const date = document.getElementById('work-date').value.trim();
+        const category = document.getElementById('work-category').value;
+        const bodyRaw = document.getElementById('work-body').value.trim();
+        const fulltext = document.getElementById('work-fulltext').value.trim();
+        const audio = document.getElementById('work-audio').value.trim();
+
+        // Convert plain text to HTML paragraphs
+        const bodyHtml = bodyRaw.split(/\n\s*\n/).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('\n');
+
+        const newEntry = `  {
+    date: "${date}",
+    title: "${title.replace(/"/g, '\\"')}",
+    category: "${category}",
+    categoryLabel: "${categoryLabels[category]}",
+    body: \`${bodyHtml}\`,
+    fullTextUrl: ${fulltext ? `"${fulltext}"` : 'null'},
+    audio: ${audio ? `"${audio}"` : 'null'},
+    video: null
+  }`;
+
+        // Insert new entry at the beginning of the array
+        const insertPos = currentContent.indexOf('[') + 1;
+        const newContent = currentContent.slice(0, insertPos) + '\n' + newEntry + ',' + currentContent.slice(insertPos);
+
+        // Commit to GitHub
+        const commitRes = await fetch(
+          `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`,
+          {
+            method: 'PUT',
+            headers: {
+              Authorization: `token ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              message: `发布作品：${title}`,
+              content: btoa(unescape(encodeURIComponent(newContent))),
+              sha: sha
+            })
+          }
+        );
+
+        if (!commitRes.ok) {
+          const err = await commitRes.json();
+          throw new Error(err.message || '提交失败');
+        }
+
+        showMsg(`发布成功！「${title}」已添加到作品集。网站将在1-2分钟内更新。`, 'success');
+
+        // Reset form
+        document.getElementById('publish-form').reset();
+
+      } catch (err) {
+        showMsg(err.message, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '发布';
+      }
+    }
+
+    function showMsg(text, type) {
+      const msg = document.getElementById('msg');
+      msg.textContent = text;
+      msg.className = `msg msg-${type}`;
+    }
+  </script>
+
+</body>
+</html>

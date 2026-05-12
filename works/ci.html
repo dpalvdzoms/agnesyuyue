@@ -33,47 +33,15 @@
         <a href="songs.html">歌曲</a>
       </nav>
 
-      <div class="masonry">
-
-        <div class="card">
-          <div class="card-date">2026.05.01</div>
-          <h3 class="card-title">满庭芳 · 暮春</h3>
-          <div class="card-body">
-            <p>风絮轻扬，柳丝低拂，一庭春事阑珊。斜阳脉脉，犹照旧栏杆。</p>
-            <p>记得年时此际，曾携手、同倚花间。如今也，空余蝶影，来去不相关。</p>
-          </div>
-          <div class="card-footer">
-            <span class="card-tag">填词</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-date">2026.03.02</div>
-          <h3 class="card-title">浣溪沙 · 夜雨</h3>
-          <div class="card-body">
-            <p>一夜潇潇滴未休，凉侵薄被不胜愁。梦回何处是扬州。</p>
-            <p>灯影摇红人寂寂，雨声敲碎月悠悠。起来独坐到更筹。</p>
-          </div>
-          <div class="card-footer">
-            <span class="card-tag">填词</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-date">2026.01.20</div>
-          <h3 class="card-title">临江仙 · 岁末</h3>
-          <div class="card-body">
-            <p>又是一年将尽也，寒窗几度昏黄。旧书堆里觅文章。笔尖犹带墨，心事已成霜。</p>
-            <p>莫问前程归路远，且将浊酒盈觞。他乡回首是吾乡。梅花开未了，消息寄钱塘。</p>
-          </div>
-          <div class="card-footer">
-            <span class="card-tag">填词</span>
-          </div>
-        </div>
-
-      </div>
+      <div class="masonry" id="works-container"></div>
     </div>
   </main>
+
+  <script src="../works-data.js"></script>
+  <script src="../works-render.js"></script>
+  <script>
+    renderWorks(document.getElementById('works-container'), 'ci', '');
+  </script>
 
 </body>
 </html>

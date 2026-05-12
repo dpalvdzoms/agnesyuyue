@@ -33,23 +33,15 @@
         <a href="songs.html">歌曲</a>
       </nav>
 
-      <div class="masonry">
-
-        <div class="card">
-          <div class="card-date">2026.03.15</div>
-          <h3 class="card-title">论田野调查中的伦理困境</h3>
-          <div class="card-body">
-            <p>当我第一次走进那个村庄的时候，我并没有预想到语言记录这件事会变得如此复杂。最初的计划很简单：录音、转写、标注……</p>
-          </div>
-          <div class="card-footer">
-            <span class="card-tag">非虚构</span>
-            <a href="pieces/nonfiction-example.html" class="card-read-more">阅读全文 →</a>
-          </div>
-        </div>
-
-      </div>
+      <div class="masonry" id="works-container"></div>
     </div>
   </main>
+
+  <script src="../works-data.js"></script>
+  <script src="../works-render.js"></script>
+  <script>
+    renderWorks(document.getElementById('works-container'), 'nonfiction', '');
+  </script>
 
 </body>
 </html>

@@ -33,23 +33,15 @@
         <a href="songs.html">歌曲</a>
       </nav>
 
-      <div class="masonry">
-
-        <div class="card">
-          <div class="card-date">2026.04.22</div>
-          <h3 class="card-title">盐湖城以西</h3>
-          <div class="card-body">
-            <p>火车驶过盐湖城的时候，车厢里几乎没有人了。林沉把额头抵在玻璃窗上，看到远处的山脊线被夕阳烧成一道暗红色的伤口……</p>
-          </div>
-          <div class="card-footer">
-            <span class="card-tag">小说</span>
-            <a href="pieces/fiction-yanchengxi.html" class="card-read-more">阅读全文 →</a>
-          </div>
-        </div>
-
-      </div>
+      <div class="masonry" id="works-container"></div>
     </div>
   </main>
+
+  <script src="../works-data.js"></script>
+  <script src="../works-render.js"></script>
+  <script>
+    renderWorks(document.getElementById('works-container'), 'fiction', '');
+  </script>
 
 </body>
 </html>

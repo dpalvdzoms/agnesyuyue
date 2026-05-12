@@ -1,0 +1,42 @@
+function renderWorks(container, category, baseUrl) {
+  const base = baseUrl || '';
+  let data = worksData;
+
+  if (category && category !== 'all') {
+    data = data.filter(item => item.category === category);
+  }
+
+  // Sort by date descending
+  data.sort((a, b) => b.date.localeCompare(a.date));
+
+  let html = '';
+  data.forEach(item => {
+    let mediaHtml = '';
+    if (item.audio !== null) {
+      mediaHtml = `<audio controls><source src="${item.audio}" type="audio/mpeg"></audio>`;
+    }
+    if (item.video !== null) {
+      mediaHtml = `<video controls><source src="${item.video}" type="video/mp4"></video>`;
+    }
+
+    let footerRight = '';
+    if (item.fullTextUrl) {
+      footerRight = `<a href="${base}${item.fullTextUrl}" class="card-read-more">阅读全文 →</a>`;
+    }
+
+    html += `
+      <div class="card">
+        <div class="card-date">${item.date}</div>
+        <h3 class="card-title">${item.title}</h3>
+        <div class="card-body">${item.body}</div>
+        ${mediaHtml}
+        <div class="card-footer">
+          <span class="card-tag">${item.categoryLabel}</span>
+          ${footerRight}
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
