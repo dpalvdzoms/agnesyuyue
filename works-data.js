@@ -1,6 +1,16 @@
 const worksData = [
   {
     date: "2023.12",
+    title: "一个县中教师的出走与归来背后",
+    category: "nonfiction",
+    categoryLabel: "非虚构",
+    body: `<p>困兽犹斗，何况人乎？</p>`,
+    fullTextUrl: "pieces/一个县中教师的出走与归来背后.html",
+    audio: null,
+    video: null
+  },
+  {
+    date: "2023.12",
     title: "江水",
     category: "fiction",
     categoryLabel: "小说",
