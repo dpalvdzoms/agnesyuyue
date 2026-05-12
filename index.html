@@ -26,8 +26,10 @@
 
   <main class="main">
 
-    <section id="intro" class="section">
+    <!-- 自我介绍 -->
+    <section id="intro" class="section intro">
       <h1 class="intro-title">你好，我是 ___</h1>
+      <div class="intro-rule"></div>
       <div class="intro-body">
         <p>
           在这里写一段简短的自我介绍。可以包括你的身份、兴趣、研究方向、
@@ -40,28 +42,30 @@
       </div>
     </section>
 
+    <!-- 学术成果 (Timeline) -->
     <section id="academic" class="section">
       <div class="section-header">
         <h2>学术成果</h2>
         <p>论文、研究项目与学术活动</p>
       </div>
 
-      <ul class="academic-list">
-        <li>
-          <span class="academic-title">论文标题示例</span>
-          <span class="academic-meta">期刊名称 · 2026</span>
-        </li>
-        <li>
-          <span class="academic-title">另一篇论文标题</span>
-          <span class="academic-meta">会议名称 · 2025</span>
-        </li>
-        <li>
-          <span class="academic-title">研究项目名称</span>
-          <span class="academic-meta">机构 · 2024–2025</span>
-        </li>
-      </ul>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-item-title">论文标题示例</div>
+          <div class="timeline-item-meta">期刊名称 · 2026</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-item-title">另一篇论文标题</div>
+          <div class="timeline-item-meta">会议名称 · 2025</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-item-title">研究项目名称</div>
+          <div class="timeline-item-meta">机构 · 2024–2025</div>
+        </div>
+      </div>
     </section>
 
+    <!-- 作品集 (Bento Grid) -->
     <section id="works" class="section">
       <div class="section-header">
         <h2>作品集</h2>
@@ -77,32 +81,15 @@
         <button data-filter="songs">歌曲</button>
       </div>
 
-      <div class="masonry" id="works-masonry">
+      <div class="bento" id="works-grid">
 
-        <div class="card" data-category="ci" id="works-ci">
-          <div class="card-date">2026.05.01</div>
-          <h3 class="card-title">词牌名 · 词题示例</h3>
-          <div class="card-body">
-            <p>上阙内容在此。平平仄仄平平仄，仄仄平平仄仄平。</p>
-            <p>下阙内容在此。仄仄平平平仄仄，平平仄仄仄平平。</p>
-          </div>
-          <div class="card-footer">
-            <span class="card-tag">填词</span>
-          </div>
+        <!-- 竖排诗词卡片 -->
+        <div class="card card-tall" data-category="ci" id="works-ci">
+          <div class="card-vertical-text">平平仄仄平平仄<br>仄仄平平仄仄平</div>
+          <div class="card-vertical-meta">词牌名 · 2026</div>
         </div>
 
-        <div class="card" data-category="modern" id="works-modern">
-          <div class="card-date">2026.04.20</div>
-          <h3 class="card-title">摩登诗词标题示例</h3>
-          <div class="card-body">
-            <p>诗词内容在此展示。</p>
-            <p>第二段内容。</p>
-          </div>
-          <div class="card-footer">
-            <span class="card-tag">摩登诗词</span>
-          </div>
-        </div>
-
+        <!-- 小说 -->
         <div class="card" data-category="fiction" id="works-fiction">
           <div class="card-date">2026.04.15</div>
           <h3 class="card-title">小说标题示例</h3>
@@ -115,22 +102,37 @@
           </div>
         </div>
 
+        <!-- 摩登诗词 -->
+        <div class="card" data-category="modern" id="works-modern">
+          <div class="card-date">2026.04.20</div>
+          <h3 class="card-title">摩登诗词标题示例</h3>
+          <div class="card-body">
+            <p>诗词内容在此展示。</p>
+            <p>第二段内容。</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-tag">摩登诗词</span>
+          </div>
+        </div>
+
+        <!-- 填词：横向展示 -->
         <div class="card" data-category="ci">
           <div class="card-date">2026.03.10</div>
           <h3 class="card-title">另一首词的示例</h3>
           <div class="card-body">
-            <p>在此填入词的内容。</p>
+            <p>在此填入词的内容。仄仄平平平仄仄，平平仄仄仄平平。</p>
           </div>
           <div class="card-footer">
             <span class="card-tag">填词</span>
           </div>
         </div>
 
-        <div class="card" data-category="nonfiction" id="works-nonfiction">
+        <!-- 非虚构（宽卡片） -->
+        <div class="card card-featured" data-category="nonfiction" id="works-nonfiction">
           <div class="card-date">2026.02.10</div>
           <h3 class="card-title">非虚构文章标题</h3>
           <div class="card-body">
-            <p>文章开头片段。这是一篇关于某个主题的深入探讨……</p>
+            <p>文章开头片段。这是一篇关于某个主题的深入探讨。可以放更长的片段，因为这张卡片横跨两列……</p>
           </div>
           <div class="card-footer">
             <span class="card-tag">非虚构</span>
@@ -138,6 +140,7 @@
           </div>
         </div>
 
+        <!-- 歌曲 -->
         <div class="card" data-category="songs" id="works-songs">
           <div class="card-date">2026.01.05</div>
           <h3 class="card-title">歌曲名称示例</h3>
@@ -158,6 +161,7 @@
   <footer class="footer">你的名字 · 2026</footer>
 
   <script>
+    // Filter
     document.querySelectorAll('.works-filter button').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelector('.works-filter button.active').classList.remove('active');
@@ -169,16 +173,17 @@
       });
     });
 
+    // Scroll spy
     const navLinks = document.querySelectorAll('.sidebar-nav a');
     const targets = [...navLinks].map(a => {
-      const id = a.getAttribute('href').slice(1);
-      return { link: a, el: document.getElementById(id) };
+      const el = document.getElementById(a.getAttribute('href').slice(1));
+      return { link: a, el };
     }).filter(t => t.el);
 
     function updateNav() {
       let active = targets[0];
       for (const t of targets) {
-        if (t.el.getBoundingClientRect().top <= 140) active = t;
+        if (t.el.getBoundingClientRect().top <= 150) active = t;
       }
       navLinks.forEach(l => l.classList.remove('active'));
       if (active) active.link.classList.add('active');
@@ -186,6 +191,23 @@
 
     window.addEventListener('scroll', updateNav, { passive: true });
     updateNav();
+
+    // Intersection Observer for fade-in
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.card, .timeline-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
   </script>
 
 </body>
