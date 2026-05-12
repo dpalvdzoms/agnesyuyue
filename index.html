@@ -9,206 +9,35 @@
 <body>
 
   <aside class="sidebar">
-    <div class="sidebar-name">你的名字</div>
+    <a href="index.html" class="sidebar-name">你的名字</a>
     <button class="mobile-toggle" onclick="document.querySelector('.sidebar-nav').classList.toggle('open')">☰</button>
     <ul class="sidebar-nav">
-      <li><a href="#intro" class="active">自我介绍</a></li>
-      <li><a href="#academic">学术成果</a></li>
-      <li><a href="#works">作品集</a></li>
-      <li><a href="#works-ci" class="sub-item">填词</a></li>
-      <li><a href="#works-modern" class="sub-item">摩登诗词</a></li>
-      <li><a href="#works-fiction" class="sub-item">小说</a></li>
-      <li><a href="#works-nonfiction" class="sub-item">非虚构</a></li>
-      <li><a href="#works-songs" class="sub-item">歌曲</a></li>
+      <li><a href="index.html" class="active">个人介绍</a></li>
+      <li><a href="experience.html">待补充经历</a></li>
+      <li><a href="academic.html">学术成果</a></li>
+      <li><a href="works/index.html">作品集</a></li>
     </ul>
     <div class="sidebar-footer">© 2026</div>
   </aside>
 
   <main class="main">
+    <div class="content-area">
+      <div class="home-centered">
 
-    <!-- 自我介绍 -->
-    <section id="intro" class="section intro">
-      <h1 class="intro-title">你好，我是 ___</h1>
-      <div class="intro-rule"></div>
-      <div class="intro-body">
-        <p>
-          在这里写一段简短的自我介绍。可以包括你的身份、兴趣、研究方向、
-          人生态度，或者任何你希望访客第一时间了解的信息。
-        </p>
-        <p>
-          这一段可以继续展开，比如你目前的状态、所在城市、正在进行的项目等。
-          你可以随时修改这些文字。
-        </p>
-      </div>
-    </section>
+        <!-- 头像占位：替换为 <img src="你的图片.jpg" alt="头像"> -->
+        <div class="avatar">头像</div>
 
-    <!-- 学术成果 (Timeline) -->
-    <section id="academic" class="section">
-      <div class="section-header">
-        <h2>学术成果</h2>
-        <p>论文、研究项目与学术活动</p>
+        <h1 class="home-name">你的名字</h1>
+        <p class="home-tagline">一句简短的介绍或标语</p>
       </div>
 
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-item-title">论文标题示例</div>
-          <div class="timeline-item-meta">期刊名称 · 2026</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-item-title">另一篇论文标题</div>
-          <div class="timeline-item-meta">会议名称 · 2025</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-item-title">研究项目名称</div>
-          <div class="timeline-item-meta">机构 · 2024–2025</div>
-        </div>
+      <div class="home-bio">
+        <p>在这里写第一段自我介绍。可以包括你的身份、兴趣、研究方向、人生态度，或者任何你希望访客第一时间了解的信息。这段文字会首行缩进两个字符，两端对齐显示。</p>
+        <p>第二段可以继续展开，比如你目前的状态、所在城市、正在进行的项目等。段落之间的间距略大于行间距，让阅读更舒适。你可以随时修改这些文字。</p>
+        <p>第三段可以写你的联系方式、社交媒体、或者其它你想让访客知道的信息。如果需要更多段落，复制一个 p 标签即可。</p>
       </div>
-    </section>
-
-    <!-- 作品集 (Bento Grid) -->
-    <section id="works" class="section">
-      <div class="section-header">
-        <h2>作品集</h2>
-        <p>按时间倒序</p>
-      </div>
-
-      <div class="works-filter">
-        <button class="active" data-filter="all">全部</button>
-        <button data-filter="ci">填词</button>
-        <button data-filter="modern">摩登诗词</button>
-        <button data-filter="fiction">小说</button>
-        <button data-filter="nonfiction">非虚构</button>
-        <button data-filter="songs">歌曲</button>
-      </div>
-
-      <div class="bento" id="works-grid">
-
-        <!-- 竖排诗词卡片 -->
-        <div class="card card-tall" data-category="ci" id="works-ci">
-          <div class="card-vertical-text">平平仄仄平平仄<br>仄仄平平仄仄平</div>
-          <div class="card-vertical-meta">词牌名 · 2026</div>
-        </div>
-
-        <!-- 小说 -->
-        <div class="card" data-category="fiction" id="works-fiction">
-          <div class="card-date">2026.04.15</div>
-          <h3 class="card-title">小说标题示例</h3>
-          <div class="card-body">
-            <p>这里是小说开头的片段。可以放一两百字左右的内容，让读者对作品有初步印象……</p>
-          </div>
-          <div class="card-footer">
-            <span class="card-tag">小说</span>
-            <a href="works/pieces/fiction-example.html" class="card-read-more">阅读全文 →</a>
-          </div>
-        </div>
-
-        <!-- 摩登诗词 -->
-        <div class="card" data-category="modern" id="works-modern">
-          <div class="card-date">2026.04.20</div>
-          <h3 class="card-title">摩登诗词标题示例</h3>
-          <div class="card-body">
-            <p>诗词内容在此展示。</p>
-            <p>第二段内容。</p>
-          </div>
-          <div class="card-footer">
-            <span class="card-tag">摩登诗词</span>
-          </div>
-        </div>
-
-        <!-- 填词：横向展示 -->
-        <div class="card" data-category="ci">
-          <div class="card-date">2026.03.10</div>
-          <h3 class="card-title">另一首词的示例</h3>
-          <div class="card-body">
-            <p>在此填入词的内容。仄仄平平平仄仄，平平仄仄仄平平。</p>
-          </div>
-          <div class="card-footer">
-            <span class="card-tag">填词</span>
-          </div>
-        </div>
-
-        <!-- 非虚构（宽卡片） -->
-        <div class="card card-featured" data-category="nonfiction" id="works-nonfiction">
-          <div class="card-date">2026.02.10</div>
-          <h3 class="card-title">非虚构文章标题</h3>
-          <div class="card-body">
-            <p>文章开头片段。这是一篇关于某个主题的深入探讨。可以放更长的片段，因为这张卡片横跨两列……</p>
-          </div>
-          <div class="card-footer">
-            <span class="card-tag">非虚构</span>
-            <a href="works/pieces/nonfiction-example.html" class="card-read-more">阅读全文 →</a>
-          </div>
-        </div>
-
-        <!-- 歌曲 -->
-        <div class="card" data-category="songs" id="works-songs">
-          <div class="card-date">2026.01.05</div>
-          <h3 class="card-title">歌曲名称示例</h3>
-          <div class="card-body">
-            <p>歌词第一段在此展示。</p>
-            <p>副歌部分。</p>
-          </div>
-          <div class="card-footer">
-            <span class="card-tag">歌曲</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
+    </div>
   </main>
-
-  <footer class="footer">你的名字 · 2026</footer>
-
-  <script>
-    // Filter
-    document.querySelectorAll('.works-filter button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelector('.works-filter button.active').classList.remove('active');
-        btn.classList.add('active');
-        const f = btn.dataset.filter;
-        document.querySelectorAll('.card').forEach(c => {
-          c.style.display = (f === 'all' || c.dataset.category === f) ? '' : 'none';
-        });
-      });
-    });
-
-    // Scroll spy
-    const navLinks = document.querySelectorAll('.sidebar-nav a');
-    const targets = [...navLinks].map(a => {
-      const el = document.getElementById(a.getAttribute('href').slice(1));
-      return { link: a, el };
-    }).filter(t => t.el);
-
-    function updateNav() {
-      let active = targets[0];
-      for (const t of targets) {
-        if (t.el.getBoundingClientRect().top <= 150) active = t;
-      }
-      navLinks.forEach(l => l.classList.remove('active'));
-      if (active) active.link.classList.add('active');
-    }
-
-    window.addEventListener('scroll', updateNav, { passive: true });
-    updateNav();
-
-    // Intersection Observer for fade-in
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.card, .timeline-item').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(16px)';
-      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(el);
-    });
-  </script>
 
 </body>
 </html>
