@@ -7,21 +7,29 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-name">你的名字</a>
-      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">自我介绍</a></li>
-        <li><a href="academic.html">学术成果</a></li>
-        <li><a href="works/index.html">作品集</a></li>
-      </ul>
-    </div>
-  </nav>
 
-  <main class="container">
-    <section class="hero">
-      <h1>你好，我是 ___</h1>
+  <!-- 左侧导航 -->
+  <aside class="sidebar">
+    <a href="#intro" class="sidebar-name">你的名字</a>
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar-nav').classList.toggle('open')">☰</button>
+    <ul class="sidebar-nav">
+      <li><a href="#intro" class="active">自我介绍</a></li>
+      <li><a href="#academic">学术成果</a></li>
+      <li><a href="#works">作品集</a></li>
+      <li><a href="#works-ci" class="sub-item">填词</a></li>
+      <li><a href="#works-modern" class="sub-item">摩登诗词</a></li>
+      <li><a href="#works-fiction" class="sub-item">小说</a></li>
+      <li><a href="#works-nonfiction" class="sub-item">非虚构</a></li>
+      <li><a href="#works-songs" class="sub-item">歌曲</a></li>
+    </ul>
+  </aside>
+
+  <!-- 主内容区 -->
+  <main class="main">
+
+    <!-- 自我介绍 -->
+    <section id="intro" class="section intro">
+      <h1 class="section-title">你好，我是 ___</h1>
       <p>
         在这里写一段简短的自我介绍。可以包括你的身份、兴趣、研究方向、人生态度，
         或者任何你希望访客第一时间了解的信息。
@@ -31,10 +39,165 @@
         你可以随时修改这些文字。
       </p>
     </section>
+
+    <!-- 学术成果 -->
+    <section id="academic" class="section">
+      <h2 class="section-title">学术成果</h2>
+      <p class="section-subtitle">论文、研究项目与学术活动</p>
+
+      <!-- 复制 academic-item 块来添加新条目 -->
+      <div class="academic-item">
+        <h3>论文标题示例</h3>
+        <p class="meta">期刊/会议名称 · 2026</p>
+      </div>
+
+      <div class="academic-item">
+        <h3>另一篇论文标题</h3>
+        <p class="meta">期刊/会议名称 · 2025</p>
+      </div>
+
+      <div class="academic-item">
+        <h3>研究项目名称</h3>
+        <p class="meta">机构名称 · 2024–2025</p>
+      </div>
+    </section>
+
+    <!-- 作品集 -->
+    <section id="works" class="section">
+      <h2 class="section-title">作品集</h2>
+      <p class="section-subtitle">按时间倒序排列，点击标签可跳转至对应分类</p>
+
+      <div class="works-filter">
+        <button class="active" data-filter="all">全部</button>
+        <button data-filter="ci">填词</button>
+        <button data-filter="modern">摩登诗词</button>
+        <button data-filter="fiction">小说</button>
+        <button data-filter="nonfiction">非虚构</button>
+        <button data-filter="songs">歌曲</button>
+      </div>
+
+      <div class="masonry" id="works-masonry">
+
+        <!-- ====== 填词 ====== -->
+        <div class="card" data-category="ci" id="works-ci">
+          <div class="card-date">2026-05-01</div>
+          <h3 class="card-title">词牌名 · 词题示例</h3>
+          <div class="card-body">
+            <p>上阙内容在此。平平仄仄平平仄，仄仄平平仄仄平。</p>
+            <p>下阙内容在此。仄仄平平平仄仄，平平仄仄仄平平。</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-tag">填词</span>
+          </div>
+        </div>
+
+        <div class="card" data-category="ci">
+          <div class="card-date">2026-03-10</div>
+          <h3 class="card-title">另一首词的示例</h3>
+          <div class="card-body">
+            <p>在此填入词的内容。</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-tag">填词</span>
+          </div>
+        </div>
+
+        <!-- ====== 摩登诗词 ====== -->
+        <div class="card" data-category="modern" id="works-modern">
+          <div class="card-date">2026-04-20</div>
+          <h3 class="card-title">摩登诗词标题示例</h3>
+          <div class="card-body">
+            <p>诗词内容在此展示。</p>
+            <p>第二段内容。</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-tag">摩登诗词</span>
+          </div>
+        </div>
+
+        <!-- ====== 小说 ====== -->
+        <div class="card" data-category="fiction" id="works-fiction">
+          <div class="card-date">2026-04-15</div>
+          <h3 class="card-title">小说标题示例</h3>
+          <div class="card-body">
+            <p>这里是小说开头的片段。可以放一两百字左右的内容，让读者对作品有初步印象……</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-tag">小说</span>
+            <a href="works/pieces/fiction-example.html" class="card-read-more">阅读全文 →</a>
+          </div>
+        </div>
+
+        <!-- ====== 非虚构 ====== -->
+        <div class="card" data-category="nonfiction" id="works-nonfiction">
+          <div class="card-date">2026-02-10</div>
+          <h3 class="card-title">非虚构文章标题</h3>
+          <div class="card-body">
+            <p>文章开头片段。这是一篇关于某个主题的深入探讨……</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-tag">非虚构</span>
+            <a href="works/pieces/nonfiction-example.html" class="card-read-more">阅读全文 →</a>
+          </div>
+        </div>
+
+        <!-- ====== 歌曲 ====== -->
+        <div class="card" data-category="songs" id="works-songs">
+          <div class="card-date">2026-01-05</div>
+          <h3 class="card-title">歌曲名称示例</h3>
+          <div class="card-body">
+            <p>歌词第一段在此展示。</p>
+            <p>副歌部分。</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-tag">歌曲</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
     <p>© 2026 你的名字. All rights reserved.</p>
   </footer>
+
+  <script>
+    // 筛选功能
+    document.querySelectorAll('.works-filter button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelector('.works-filter button.active').classList.remove('active');
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.card').forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+        });
+      });
+    });
+
+    // 滚动高亮导航
+    const sections = document.querySelectorAll('.section, [id^="works-"]');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+    function updateNav() {
+      let current = '';
+      sections.forEach(sec => {
+        if (sec.offsetTop - 120 <= window.scrollY) {
+          current = sec.id;
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateNav);
+    updateNav();
+  </script>
+
 </body>
 </html>
