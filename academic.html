@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学术成果</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-name">你的名字</a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">自我介绍</a></li>
+        <li><a href="academic.html" class="active">学术成果</a></li>
+        <li><a href="works/index.html">作品集</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1 class="page-title">学术成果</h1>
+    <p class="page-subtitle">论文、研究项目与学术活动</p>
+
+    <!-- 复制下面的 academic-item 块来添加新条目 -->
+    <div class="academic-item">
+      <h3>论文标题示例</h3>
+      <p class="meta">期刊/会议名称 · 2026</p>
+    </div>
+
+    <div class="academic-item">
+      <h3>另一篇论文标题</h3>
+      <p class="meta">期刊/会议名称 · 2025</p>
+    </div>
+
+    <div class="academic-item">
+      <h3>研究项目名称</h3>
+      <p class="meta">机构名称 · 2024-2025</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 你的名字. All rights reserved.</p>
+  </footer>
+</body>
+</html>

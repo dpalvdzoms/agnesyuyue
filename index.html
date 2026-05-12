@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人主页</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-name">你的名字</a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">自我介绍</a></li>
+        <li><a href="academic.html">学术成果</a></li>
+        <li><a href="works/index.html">作品集</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <h1>你好，我是 ___</h1>
+      <p>
+        在这里写一段简短的自我介绍。可以包括你的身份、兴趣、研究方向、人生态度，
+        或者任何你希望访客第一时间了解的信息。
+      </p>
+      <p>
+        这一段可以继续展开，比如你目前的状态、所在城市、正在进行的项目等。
+        你可以随时修改这些文字。
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 你的名字. All rights reserved.</p>
+  </footer>
+</body>
+</html>
