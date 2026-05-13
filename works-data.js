@@ -1,5 +1,20 @@
 const worksData = [
   {
+    date: "2023.04.26",
+    title: "恨来迟 · 为友小说题",
+    category: "ci",
+    categoryLabel: "填词",
+    body: `<p>黯夜游园，醉里惊醒，避路匆匆。</p>
+<p>月影照、墙头叩窗人现，恰若惊鸿。</p>
+<div class="spacer"></div>
+<p>怎怨我、贪妄恋春风，</p>
+<p>惹尽是、尘世成空？</p>
+<p>恍不见、床头案前无梦，烛掩花红。</p>`,
+    fullTextUrl: null,
+    audio: null,
+    video: null
+  },
+  {
     date: "2026.01.04",
     title: "临江仙 · 新年上班第一天",
     category: "modern",
