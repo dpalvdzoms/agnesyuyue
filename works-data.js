@@ -1,5 +1,19 @@
 const worksData = [
   {
+    date: "2023.11.04",
+    title: "朝中措 · 为元楚寿",
+    category: "ci",
+    categoryLabel: "填词",
+    body: `<p>平生十九恰初蒙，北上乱秋鸿。</p>
+<p>我是人间过客，与君山水相逢。</p>
+<div class="spacer"></div>
+<p>青空设宴，雾云作酒，楚木为盅。</p>
+<p>山水但嫌席短，留君且话从容。</p>`,
+    fullTextUrl: null,
+    audio: null,
+    video: null
+  },
+  {
     date: "2023.04.26",
     title: "恨来迟 · 为友小说题",
     category: "ci",
