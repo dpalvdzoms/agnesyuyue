@@ -1,5 +1,19 @@
 const worksData = [
   {
+    date: "2018.04.01",
+    title: "采桑子 · 华师一春试落榜作",
+    category: "ci",
+    categoryLabel: "填词",
+    body: `<p>半程逐道风吹雨，问尽苍凉。</p>
+<p>归倚幽篁，欲借功名无可偿。</p>
+<div class="spacer"></div>
+<p>远方无意留人在，笑罢轻狂。</p>
+<p>又自怜伤，总是彷徨向异乡。</p>`,
+    fullTextUrl: null,
+    audio: null,
+    video: null
+  },
+  {
     date: "2018.03.11",
     title: "江城子",
     category: "ci",
