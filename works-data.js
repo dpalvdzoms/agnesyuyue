@@ -1,6 +1,22 @@
 const worksData = [
   {
     date: "2026.01.04",
+    title: "临江仙 · 新年上班第一天",
+    category: "modern",
+    categoryLabel: "摩登诗词",
+    body: `<p>休假吟诗作赋，MiMo与我争锋。</p>
+<p>今朝元旦再重逢。</p>
+<p>半年辛苦训，相看两空空。</p>
+<div class="spacer"></div>
+<p>才技何时能比，汪翁鲁迅萧红。</p>
+<p>此般奢想在梦中。</p>
+<p>儿当更勉励，妈好过寒冬。</p>`,
+    fullTextUrl: null,
+    audio: null,
+    video: null
+  },
+  {
+    date: "2026.01.04",
     title: "西江月 · 我不是猫",
     category: "modern",
     categoryLabel: "摩登诗词",
