@@ -6,11 +6,12 @@ function renderWorks(container, category, baseUrl) {
     data = data.filter(item => item.category === category);
   }
 
-  // Sort by date descending
   data.sort((a, b) => b.date.localeCompare(a.date));
 
-  let html = '';
-  data.forEach(item => {
+  const leftCards = [];
+  const rightCards = [];
+
+  data.forEach((item, i) => {
     let mediaHtml = '';
     if (item.audio !== null) {
       mediaHtml = `<audio controls><source src="${item.audio}" type="audio/mpeg"></audio>`;
@@ -24,7 +25,7 @@ function renderWorks(container, category, baseUrl) {
       footerRight = `<a href="${base}${item.fullTextUrl}" class="card-read-more">阅读全文 →</a>`;
     }
 
-    html += `
+    const card = `
       <div class="card">
         <div class="card-date">${item.date}</div>
         <h3 class="card-title">${item.title}</h3>
@@ -36,7 +37,16 @@ function renderWorks(container, category, baseUrl) {
         </div>
       </div>
     `;
+
+    if (i % 2 === 0) {
+      leftCards.push(card);
+    } else {
+      rightCards.push(card);
+    }
   });
 
-  container.innerHTML = html;
+  container.innerHTML = `
+    <div class="masonry-col">${leftCards.join('')}</div>
+    <div class="masonry-col">${rightCards.join('')}</div>
+  `;
 }
