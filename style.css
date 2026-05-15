@@ -238,13 +238,14 @@ a:hover { color: var(--gray); }
 
 /* ═══ Masonry ═══ */
 .masonry {
-  columns: 2;
-  column-gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.6rem 2rem;
+  align-items: start;
 }
 
 .card {
-  break-inside: avoid;
-  margin-bottom: 1.6rem;
+  margin-bottom: 0;
   padding: 1.5rem;
   border: 1px solid #CCCCCC;
   border-radius: 8px;
@@ -364,7 +365,7 @@ a:hover { color: var(--gray); }
 
 /* ═══ Responsive ═══ */
 @media (max-width: 900px) {
-  .masonry { columns: 1; }
+  .masonry { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
