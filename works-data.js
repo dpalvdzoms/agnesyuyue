@@ -1,5 +1,15 @@
 const worksData = [
   {
+    date: "2023.07.21",
+    title: "最佳辩友",
+    category: "songs",
+    categoryLabel: "歌曲",
+    body: `<p>从缺</p>`,
+    fullTextUrl: "pieces/最佳辩友.html",
+    audio: "../../audio/最佳辩友demo.mp4",
+    video: null
+  },
+  {
     date: "2019.12",
     title: "掠过",
     category: "fiction",
