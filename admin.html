@@ -103,12 +103,12 @@
 <body>
 
   <aside class="sidebar">
-    <a href="index.html" class="sidebar-name">你的名字</a>
+    <a href="index.html" class="sidebar-name">Yu Yue</a>
     <button class="mobile-toggle" onclick="document.querySelector('.sidebar-nav').classList.toggle('open')">☰</button>
     <ul class="sidebar-nav">
       <li><a href="index.html">个人介绍</a></li>
-      <li><a href="experience.html">待补充经历</a></li>
-      <li><a href="academic.html">学术成果</a></li>
+      <li><a href="experience.html">研究经历</a></li>
+      <li><a href="academic.html">实习经历</a></li>
       <li><a href="works/index.html">作品集</a></li>
     </ul>
     <div class="sidebar-footer">管理页面</div>
@@ -212,8 +212,21 @@
             <select id="ft-backlink">
               <option value="../fiction.html">小说列表</option>
               <option value="../non-fiction.html">非虚构列表</option>
+              <option value="../songs.html">歌曲列表</option>
               <option value="../index.html">作品集总览</option>
             </select>
+          </div>
+
+          <div class="form-group">
+            <label>音频链接（可选）</label>
+            <input type="text" id="ft-audio" placeholder="例：../../audio/song.mp3 或外部链接">
+            <p class="form-hint">歌曲可填写音频文件路径，会在全文页面顶部显示播放器</p>
+          </div>
+
+          <div class="form-group">
+            <label>视频/iframe 链接（可选）</label>
+            <input type="text" id="ft-video" placeholder="例：视频文件路径或嵌入链接">
+            <p class="form-hint">支持视频文件或 iframe 嵌入（如网易云、B站等）</p>
           </div>
 
           <div class="form-group">
@@ -382,6 +395,8 @@
         const category = document.getElementById('ft-category').value;
         const backlink = document.getElementById('ft-backlink').value;
         const bodyRaw = document.getElementById('ft-body').value.trim();
+        const audioUrl = document.getElementById('ft-audio').value.trim();
+        const videoUrl = document.getElementById('ft-video').value.trim();
 
         // Convert plain text paragraphs to HTML
         // Single line break = new paragraph, empty line = visual spacer
@@ -389,9 +404,23 @@
           line.trim() === '' ? '        <div class="spacer"></div>' : `        <p>${line}</p>`
         ).join('\n');
 
+        // Build media HTML
+        let mediaHtml = '';
+        if (audioUrl) {
+          mediaHtml += `\n      <audio controls style="width:100%; margin-bottom:2rem;"><source src="${audioUrl}" type="audio/mpeg"></audio>\n`;
+        }
+        if (videoUrl) {
+          if (videoUrl.includes('iframe') || videoUrl.includes('http')) {
+            mediaHtml += `\n      <iframe src="${videoUrl}" style="width:100%; aspect-ratio:16/9; border:none; margin-bottom:2rem;" allowfullscreen></iframe>\n`;
+          } else {
+            mediaHtml += `\n      <video controls style="width:100%; margin-bottom:2rem;"><source src="${videoUrl}" type="video/mp4"></video>\n`;
+          }
+        }
+
         // Build HTML page
         const backlinkText = backlink.includes('fiction') ? '小说' :
-                             backlink.includes('non-fiction') ? '非虚构' : '作品集';
+                             backlink.includes('non-fiction') ? '非虚构' :
+                             backlink.includes('songs') ? '歌曲' : '作品集';
 
         const html = `<!DOCTYPE html>
 <html lang="zh-CN">
@@ -404,12 +433,12 @@
 <body>
 
   <aside class="sidebar">
-    <a href="../../index.html" class="sidebar-name">你的名字</a>
+    <a href="../../index.html" class="sidebar-name">Yu Yue</a>
     <button class="mobile-toggle" onclick="document.querySelector('.sidebar-nav').classList.toggle('open')">☰</button>
     <ul class="sidebar-nav">
       <li><a href="../../index.html">个人介绍</a></li>
-      <li><a href="../../experience.html">待补充经历</a></li>
-      <li><a href="../../academic.html">学术成果</a></li>
+      <li><a href="../../experience.html">研究经历</a></li>
+      <li><a href="../../academic.html">实习经历</a></li>
       <li><a href="../index.html" class="active">作品集</a></li>
     </ul>
     <div class="sidebar-footer">© 2026</div>
@@ -420,7 +449,7 @@
       <a href="${backlink}" class="back-link">← 返回${backlinkText}</a>
       <h1 class="article-title">${title}</h1>
       <div class="article-meta">${date} · ${category}</div>
-
+${mediaHtml}
       <div class="article-content">
 ${paragraphs}
       </div>
