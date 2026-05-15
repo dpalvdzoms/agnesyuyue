@@ -197,6 +197,13 @@ a:hover { color: var(--gray); }
   margin-bottom: 0;
 }
 
+.page-body h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1.2rem;
+  margin-bottom: 0.4rem;
+}
+
 /* ═══ Works: wider content area ═══ */
 .content-wide {
   width: 100%;
