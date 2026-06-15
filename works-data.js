@@ -259,17 +259,6 @@ const worksData = [
     fullTextUrl: "pieces/江水.html",
     audio: null,
     video: null
-  },
-  {
-    date: "2026.02.18",
-    title: "无题",
-    category: "songs",
-    categoryLabel: "歌曲",
-    body: `<p>词：你的名字<br>曲：你的名字</p>
-<p>城市的灯火像素点一样排列<br>我在第三十七层楼看见你的影子<br>从一片云走到另一片云</p>`,
-    fullTextUrl: null,
-    audio: null,
-    video: null
   }
   
 ];
